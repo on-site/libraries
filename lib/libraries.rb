@@ -1,3 +1,7 @@
-module Libraries
+require "active_support"
 
-end
+require "libraries/enumerable"
+require "libraries/array"
+require "libraries/hash"
+require "libraries/string"
+require "libraries/object"
