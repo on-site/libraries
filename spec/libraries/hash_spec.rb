@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Hash do
 
   let(:names) { {:first => 'Homer', :mi => '', :last => 'Simpson', "A" => true} }
+  let(:numbers) { {:b => "0", "c" => 1} }
 
   describe "#parent_to?" do
     it "returns true for existing slices" do
@@ -13,11 +14,18 @@ describe Hash do
       names.should_not be_parent_to(:first => "Bart", :last => "Simpson")
       names.should_not be_parent_to(:first => "Bart")
     end
-    it "supports key, value paris" do
+    it "supports key, value pairs" do
       names.should be_parent_to(:first, "Homer")
       names.should be_parent_to(:first, "Homer", :last, "Simpson")
       names.should_not be_parent_to(:first, "Bart")
       names.should_not be_parent_to(:first, "Bart", :last, "Simpson")
+    end
+    it "considers string integers with the key, value pairs call" do
+      numbers.should be_parent_to(:b, 0)
+      numbers.should_not be_parent_to(:b => 0)
+      numbers.should be_parent_to("c", "1")
+      numbers.should_not be_parent_to("c" => "1")
+      numbers.should be_parent_to(:b, 0, "c", "1")
     end
   end
 

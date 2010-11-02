@@ -43,7 +43,7 @@ class Hash
   def parent_to?(*args)
     return self.slice(*args.first.keys) == args.first if args.size == 1 && args.first.is_a?(Hash)
     args.each_pair do |key, value|
-      return false unless self[key] == value
+      return false unless self[key].to_s == value.to_s
     end
     true
   end
