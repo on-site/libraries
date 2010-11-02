@@ -21,8 +21,9 @@ module ActiveRecord
         scoped :conditions => args
       end
 
-      def by_date_range(options)
-        scoped :conditions => ["#{options[:date_field]} BETWEEN ? AND ?", options[:start_date].to_s(:db), (options[:end_date] || Date.today).to_s(:db)]
+      def date_range(options)
+        options.reverse_merge! :field => "created_at", :start => Time.now, :end => Time.now
+        scoped :conditions => { options[:field] => options[:range] || (options[:start]..options[:end]) }
       end
 
       def sort_scope(options)
