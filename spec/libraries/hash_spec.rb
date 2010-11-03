@@ -141,6 +141,10 @@ describe Hash do
       source_hash.rename_keys! :a => :b, 1 => 2, -1 => -2, "a" => "b"
       source_hash.should == {:b => "Symbol", 2 => "Integer", -2 => 100, "b" => "Text"}
     end
+    it "does not affect destination keys if sources keys do not exist" do
+      source_hash.rename_keys! :b => :a, 3 => 1, -1 => -37, "a" => "z", 99 => :x
+      source_hash.should == {:a => "Symbol", 1 => "Integer", -37 => 100, "z" => "Text"}
+    end
   end
 
 end

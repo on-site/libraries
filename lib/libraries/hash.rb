@@ -26,7 +26,7 @@ class Hash
   # Returns hash with keys renamed
   def rename_keys!(keys_hash)
     keys_hash.each do |old, new|
-      self[new] = self.delete(old)
+      self[new] = self.delete(old) if self[old]
     end
     self
   end
