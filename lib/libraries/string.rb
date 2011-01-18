@@ -29,4 +29,8 @@ class String
     self.gsub(/[^A-Z0-9]/i, '_').squeeze("_").strip("_").downcase
   end
 
+  def parse_date(format='%m/%d/%Y')
+    Date.strptime(self, format) rescue to_date
+  end
+
 end

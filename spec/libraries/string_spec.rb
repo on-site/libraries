@@ -47,4 +47,10 @@ describe String do
     end
   end
 
+  describe "#parse_date" do
+    it "understands format" do
+      "12/17/2010".parse_date.should == "17/12/2010".parse_date
+    end
+  end
+
 end
