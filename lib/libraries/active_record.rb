@@ -23,7 +23,7 @@ module ActiveRecord
 
       def date_range(options)
         options.reverse_merge! :field => "created_at", :start => Time.now, :end => Time.now
-        scoped :conditions => { options[:field] => options[:range] || (options[:start]..options[:end]) }
+        scoped :conditions => { options[:field] => options[:range] || (options[:start].beginning_of_day..options[:end].end_of_day) }
       end
 
       def sort_scope(options)
